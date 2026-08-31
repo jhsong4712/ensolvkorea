@@ -89,6 +89,70 @@
             text-align: left;
         }
         .card h3 { color: #203a43; margin-top: 0; }
+        .card {
+            cursor: pointer;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .card:hover {
+            box-shadow: 0 6px 16px rgba(15, 32, 39, 0.12);
+            transform: translateY(-2px);
+        }
+        .card .more { color: #203a43; font-weight: bold; font-size: 14px; margin-top: 12px; display: inline-block; }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 32, 39, 0.55);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 100;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: white;
+            border-radius: 10px;
+            max-width: 640px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            text-align: left;
+        }
+        .modal-image {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+            display: block;
+        }
+        .modal-body { padding: 30px; }
+        .modal-body h3 { color: #203a43; margin: 0 0 8px; font-size: 28px; }
+        #modal-desc { overflow: hidden; }
+        .modal-body #modal-desc p { color: #495057; margin: 0 0 2px; }
+        .modal-section-heading {
+            font-size: 21px;
+            font-weight: 700;
+            color: #0f2027;
+            margin: 26px 0 4px;
+        }
+        .modal-section-heading:first-of-type { margin-top: 28px; }
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(15, 32, 39, 0.7);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 18px;
+            line-height: 1;
+            cursor: pointer;
+        }
+        .modal-close:hover { background: #0f2027; }
 
         #contact {
             background: #f1f3f5;
@@ -153,16 +217,29 @@
     <section class="section" id="products">
         <h2>핵심 라인업</h2>
         <div class="grid">
-            <div class="card">
+            <div class="card" onclick="openModal('greenpower')">
                 <h3>그린파워 (Green Power)</h3>
                 <p>강력한 세정력과 작업자의 안전을 동시에 만족시키는 친환경 고성능 세정제</p>
+                <span class="more">자세히 보기 →</span>
             </div>
-            <div class="card">
+            <div class="card" onclick="openModal('ensolve')">
                 <h3>엔솔브 5408 (Ensolve)</h3>
                 <p>첨단 산업 공정을 위한 정밀 탈지 및 속건성 전문 세정 솔루션</p>
+                <span class="more">자세히 보기 →</span>
             </div>
         </div>
     </section>
+
+    <div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBackdrop(event)">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <img class="modal-image" id="modal-image" src="" alt="">
+            <div class="modal-body">
+                <h3 id="modal-title"></h3>
+                <div id="modal-desc"></div>
+            </div>
+        </div>
+    </div>
 
     <section class="section" id="contact">
         <h2>고객문의</h2>
@@ -178,5 +255,60 @@
         <p>© 2001 엔솔브 코리아 All Rights Reserved. | 미국 본사 정품 공급원</p>
         <p>대표전화: 054-972-7990 | 주소: 경북 칠곡군 지천면 송정원곡길 25 | 우편번호: 39867</p>
     </footer>
+
+    <script>
+        const products = {
+            greenpower: {
+                title: '그린파워 (Green Power)',
+                image: 'https://images.unsplash.com/photo-1581093458791-9d42e1a6e6b3?auto=format&fit=crop&w=1200&q=80',
+                sections: [
+                    { heading: '강력한 세척 및 박리 성능', text: '왁스, 플럭스, 냉각수(절삭유), 오일, 페인트 및 광학 부품의 이물질 등을 깨끗하게 세척하고 제거합니다. 위어 바(Weir bar) 및 오일 스키머의 유수 분리가 원활하도록 설계되어, 유독성 폐기물 배출량을 최소화합니다.' },
+                    { heading: '소재 보호 및 광택 효과', text: '알루미늄, 황동, 구리의 표면을 변색 없이 밝고 깨끗하게 만들어 줍니다. 냉수와 온수 모두에서 사용할 수 있습니다.' },
+                    { heading: '뛰어난 호환성과 안전성', text: '모든 브랜드의 수계 부품 세척기, 디버링(바리 제거) 장비, 초음파 세척기, 바닥 세척기, 고압 및 스팀 세척기에 안전하게 사용할 수 있습니다.' },
+                    { heading: '편리한 작업성', text: '거품이 적게 발생하고 물에 잘 씻겨 내려가며, 별도의 소포제(거품 제거제)가 필요 없습니다. 경수, 연수, 탈이온수(순수) 등 모든 수질에서 효과적입니다. 인산염을 함유하지 않으며, 방청(녹 방지) 성분이 포함되어 있습니다.' }
+                ]
+            },
+            ensolve: {
+                title: '엔솔브 5408 (Ensolve)',
+                image: 'https://images.unsplash.com/photo-1581092160607-ee22731c9d47?auto=format&fit=crop&w=1200&q=80',
+                sections: [
+                    { heading: '정밀 탈지 및 속건성', text: '첨단 산업 공정을 위한 정밀 탈지 및 속건성 전문 세정 솔루션입니다. 정밀 부품의 미세한 유분과 이물질까지 완벽하게 제거하며, 빠른 건조 속도로 생산성 저하 없이 공정에 적용할 수 있습니다.' }
+                ]
+            }
+        };
+
+        function openModal(key) {
+            const p = products[key];
+            document.getElementById('modal-title').textContent = p.title;
+            document.getElementById('modal-image').src = p.image;
+            document.getElementById('modal-image').alt = p.title;
+
+            const descEl = document.getElementById('modal-desc');
+            descEl.innerHTML = '';
+            p.sections.forEach(function(sec) {
+                const h = document.createElement('h4');
+                h.className = 'modal-section-heading';
+                h.textContent = sec.heading;
+                const t = document.createElement('p');
+                t.textContent = sec.text;
+                descEl.appendChild(h);
+                descEl.appendChild(t);
+            });
+
+            document.getElementById('modal-overlay').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').classList.remove('active');
+        }
+
+        function closeModalOnBackdrop(e) {
+            if (e.target.id === 'modal-overlay') closeModal();
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
 </body>
 </html>
