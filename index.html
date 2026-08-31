@@ -4,36 +4,149 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>그린파워 & 엔솔브 한국 공식 독점 수입원</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <style>
-        body { font-family: 'Malgun Gothic', sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; }
-        header { background-color: #0f2027; color: white; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; }
+        @font-face {
+            font-family: 'Pretendard';
+            src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Pretendard';
+            src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #0f2027;
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
         .logo { font-size: 24px; font-weight: bold; }
-        nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: bold; }
-        
-        .hero { background: linear-gradient(rgba(15, 32, 39, 0.8), rgba(32, 58, 67, 0.8)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover; color: white; padding: 100px 50px; text-align: center; }
-        .hero h1 { font-size: 40px; margin-bottom: 20px; }
-        .hero p { font-size: 20px; color: #ced4da; }
-        
-        .section { padding: 60px 50px; text-align: center; }
-        .grid { display: flex; justify-content: center; gap: 40px; margin-top: 40px; }
-        .card { background: #f8f9fa; border: 1px solid #e9ecef; border-top: 5px solid #203a43; padding: 30px; width: 300px; border-radius: 8px; }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+        nav a:hover { color: #ced4da; }
+
+        .hero {
+            background: linear-gradient(rgba(15, 32, 39, 0.8), rgba(32, 58, 67, 0.8)),
+                        url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #ced4da;
+        }
+
+        .section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .section h2 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-top: 5px solid #203a43;
+            padding: 30px;
+            width: 300px;
+            max-width: 100%;
+            border-radius: 8px;
+            text-align: left;
+        }
         .card h3 { color: #203a43; margin-top: 0; }
-        
-        footer { background: #0f2027; color: #868e96; text-align: center; padding: 30px; font-size: 14px; }
+
+        #contact {
+            background: #f1f3f5;
+        }
+        .contact-box {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 40px 30px;
+        }
+        .contact-box p {
+            margin-bottom: 24px;
+            color: #495057;
+        }
+        .mail-button {
+            display: inline-block;
+            background: #203a43;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 14px 30px;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+        .mail-button:hover { background: #0f2027; }
+
+        footer {
+            background: #0f2027;
+            color: #868e96;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 14px;
+        }
+        footer p { margin: 6px 0; }
+
+        @media (max-width: 600px) {
+            header { padding: 16px 20px; justify-content: center; text-align: center; }
+            nav a { margin: 0 10px; }
+            .hero { padding: 70px 16px; }
+            .hero h1 { font-size: 24px; }
+            .hero p { font-size: 16px; }
+            .card { width: 100%; }
+        }
     </style>
 </head>
 <body>
-
     <header>
         <div class="logo">엔솔브 코리아</div>
         <nav>
             <a href="#products">제품소개</a>
-            <a href="#contact">고객문의</a>
+            <a href="mailto:jun@ensolvkorea.com?subject=%5B%EC%97%94%EC%86%94%EB%B8%8C%20%EC%BD%94%EB%A6%AC%EC%95%84%5D%20%EC%A0%9C%ED%92%88%20%EB%AC%B8%EC%9D%98">고객문의</a>
         </nav>
     </header>
 
     <section class="hero">
-        <h1>현재 홈페이지 점검 중입니다.  <br> 제품 관련 문의는 jun@ensolvkorea.com 으로 이메일을 보내주시기 바랍니다.</h1>
+        <h1>현재 홈페이지 점검 중입니다.<br>제품 관련 문의는 jun@ensolvkorea.com 으로 이메일을 보내주시기 바랍니다.</h1>
         <p>미국 No.1 산업용 세정제 '그린파워' & '엔솔브' 한국 공식 독점 수입원</p>
     </section>
 
@@ -51,10 +164,19 @@
         </div>
     </section>
 
+    <section class="section" id="contact">
+        <h2>고객문의</h2>
+        <div class="contact-box">
+            <p>제품 관련 문의사항은 아래 버튼을 눌러 이메일로 보내주세요.</p>
+            <a class="mail-button" href="mailto:jun@ensolvkorea.com?subject=%5B%EC%97%94%EC%86%94%EB%B8%8C%20%EC%BD%94%EB%A6%AC%EC%95%84%5D%20%EC%A0%9C%ED%92%88%20%EB%AC%B8%EC%9D%98">
+                이메일로 문의하기
+            </a>
+        </div>
+    </section>
+
     <footer>
         <p>© 2001 엔솔브 코리아 All Rights Reserved. | 미국 본사 정품 공급원</p>
         <p>대표전화: 054-972-7990 | 주소: 경북 칠곡군 지천면 송정원곡길 25 | 우편번호: 39867</p>
     </footer>
-
 </body>
 </html>
