@@ -148,7 +148,7 @@
             background: white;
             border: 1px solid #eceff1;
             padding: 36px 32px;
-            width: 320px;
+            width: 380px;
             max-width: 100%;
             border-radius: 10px;
             text-align: left;
@@ -174,6 +174,7 @@
         }
         .card:hover::before { transform: scaleX(1); }
         .card h3 { color: var(--navy); margin: 0 0 12px; font-size: 19px; font-weight: 700; }
+        .card h3.nowrap-title { font-size: 18px; white-space: nowrap; }
         .card p { margin: 0; font-size: 14.5px; color: var(--text-body); }
         .card .more {
             color: var(--accent);
@@ -215,9 +216,10 @@
             display: block;
         }
         .modal-body { padding: 38px 36px 42px; }
-        .modal-body h3 { color: var(--navy); margin: 0 0 8px; font-size: 28px; font-weight: 700; }
+        .modal-body h3 { color: var(--navy); margin: 0 0 8px; font-size: 26px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .modal-body h3 .en-part { font-size: 17px; font-weight: 500; color: var(--text-muted); margin-left: 6px; }
         #modal-desc { overflow: hidden; }
-        .modal-body #modal-desc p { color: var(--text-body); margin: 0 0 2px; font-size: 15px; }
+        .modal-body #modal-desc p { color: var(--text-body); margin: 0 0 2px; font-size: 15px; white-space: pre-line; }
         .modal-section-heading {
             font-size: 21px;
             font-weight: 700;
@@ -327,12 +329,12 @@
         <div class="grid">
             <div class="card" onclick="openModal('greenpower')">
                 <h3>그린파워 (Green Power)</h3>
-                <p>강력한 세정력과 작업자의 안전을 동시에 만족시키는 친환경 고성능 세정제</p>
+                <p>강력한 세정력과 작업자의 안전을<br>동시에 만족시키는 친환경 고성능 세정제</p>
                 <span class="more">자세히 보기 →</span>
             </div>
             <div class="card" onclick="openModal('ensolve')">
-                <h3>엔솔브 5408 (EnSolv® 5408)</h3>
-                <p>보잉 승인 고정밀 세척 용제 — 항공우주·전자·자동차 산업의 정밀 세척 솔루션</p>
+                <h3 class="nowrap-title">엔솔브 5408 (EnSolv® 5408)</h3>
+                <p>보잉 승인 고정밀 세척 용제<br>항공우주·전자·자동차 산업의 정밀 세척 솔루션</p>
                 <span class="more">자세히 보기 →</span>
             </div>
         </div>
@@ -370,30 +372,32 @@
     <script>
         const products = {
             greenpower: {
-                title: '그린파워 (Green Power)',
+                title: '그린파워',
+                titleEn: '(Green Power)',
                 image: 'https://images.unsplash.com/photo-1581093458791-9d42e1a6e6b3?auto=format&fit=crop&w=1200&q=80',
                 sections: [
                     { heading: '강력한 세척 및 박리 성능', text: '왁스, 플럭스, 냉각수(절삭유), 오일, 페인트 및 광학 부품의 이물질 등을 깨끗하게 세척하고 제거합니다. 위어 바(Weir bar) 및 오일 스키머의 유수 분리가 원활하도록 설계되어, 유독성 폐기물 배출량을 최소화합니다.' },
-                    { heading: '소재 보호 및 광택 효과', text: '알루미늄, 황동, 구리의 표면을 변색 없이 밝고 깨끗하게 만들어 줍니다. 냉수와 온수 모두에서 사용할 수 있습니다.' },
-                    { heading: '뛰어난 호환성과 안전성', text: '모든 브랜드의 수계 부품 세척기, 디버링(바리 제거) 장비, 초음파 세척기, 바닥 세척기, 고압 및 스팀 세척기에 안전하게 사용할 수 있습니다.' },
-                    { heading: '편리한 작업성', text: '거품이 적게 발생하고 물에 잘 씻겨 내려가며, 별도의 소포제(거품 제거제)가 필요 없습니다. 경수, 연수, 탈이온수(순수) 등 모든 수질에서 효과적입니다. 인산염을 함유하지 않으며, 방청(녹 방지) 성분이 포함되어 있습니다.' }
+                    { heading: '소재 보호 및 광택 효과', text: '알루미늄, 황동, 구리의 표면을 변색 없이 밝고 깨끗하게 만들어 줍니다.\n냉수와 온수 모두에서 사용할 수 있습니다.' },
+                    { heading: '뛰어난 호환성과 안전성', text: '모든 브랜드의 수계 부품 세척기, 디버링(바리 제거) 장비, 초음파 세척기,\n바닥 세척기, 고압 및 스팀 세척기에 안전하게 사용할 수 있습니다.' },
+                    { heading: '편리한 작업성', text: '거품이 적게 발생하고 물에 잘 씻겨 내려가며, 별도의 소포제(거품 제거제)가\n필요 없습니다. 경수, 연수, 탈이온수(순수) 등 모든 수질에서 효과적입니다.\n인산염을 함유하지 않으며, 방청(녹 방지) 성분이 포함되어 있습니다.' }
                 ]
             },
             ensolve: {
-                title: '엔솔브 5408 (EnSolv® 5408)',
+                title: '엔솔브 5408',
+                titleEn: '(EnSolv® 5408)',
                 image: 'https://images.unsplash.com/photo-1581092160607-ee22731c9d47?auto=format&fit=crop&w=1200&q=80',
                 sections: [
                     { heading: '보잉(Boeing) 승인 고정밀 세척 용제', text: 'EnSolv® 5408은 보잉사에서 공식 승인한 n-프로필 브로마이드 기반의 정밀 세척 용제입니다. 항공우주, 전자, 자동차 등 높은 신뢰성을 요구하는 첨단 산업 분야의 정밀 세척 프로세스에 최적화되어 있습니다. 기존 할로겐화 용제를 대체할 수 있는 강력하고 경제적인 친환경·고성능 솔루션입니다.' },
-                    { heading: '뛰어난 용해력 및 빠른 침투·건조', text: '향상된 안정성과 높은 용해력으로 금속 및 전자 부품에 남아 있는 오일, 그리스, 플럭스 잔류물 등 각종 오염 물질을 완벽하게 제거합니다. 표면 장력과 점도가 낮아 복잡하고 미세한 부품 내부까지 깊숙이 침투하며, 건조 속도가 빨라 작업 효율을 극대화합니다.' },
+                    { heading: '뛰어난 용해력 및 빠른 침투·건조', text: '향상된 안정성과 높은 용해력으로 금속 및 전자 부품에 남아 있는 오일, 그리스,\n플럭스 잔류물 등 각종 오염 물질을 완벽하게 제거합니다. 표면 장력과 점도가\n낮아 복잡하고 미세한 부품 내부까지 깊숙이 침투하며, 건조 속도가 빨라 작업\n효율을 극대화합니다.' },
                     { heading: '친환경 및 뛰어난 작업 안전성', text: '불연성 제품으로 인화점이 없어 화재 위험이 없으며, 오존층 파괴 지수(ODP) 0 및 PFAS 미함유로 환경 규제에 대응할 수 있습니다. 세척 후 표면 잔류물이 남지 않아 후속 공정의 신뢰성을 높여줍니다.' },
-                    { heading: '다양한 세척 공정 및 산업 분야 적용', text: '증기 탈지, 초음파 세척, 디플럭스, 산소 튜브 세척은 물론 운반액 및 윤활제 분산용 용제 등 다양한 방식으로 활용 가능합니다. 전자부품, 항공우주 부품, 자동차 부품 및 일반 산업용 탈지에 폭넓게 사용됩니다.' }
+                    { heading: '다양한 세척 공정 및 산업 분야 적용', text: '증기 탈지, 초음파 세척, 디플럭스, 산소 튜브 세척은 물론 운반액 및 윤활제\n분산용 용제 등 다양한 방식으로 활용 가능합니다. 전자부품, 항공우주 부품,\n자동차 부품 및 일반 산업용 탈지에 폭넓게 사용됩니다.' }
                 ]
             }
         };
 
         function openModal(key) {
             const p = products[key];
-            document.getElementById('modal-title').textContent = p.title;
+            document.getElementById('modal-title').innerHTML = p.title + '<span class="en-part">' + p.titleEn + '</span>';
             document.getElementById('modal-image').src = p.image;
             document.getElementById('modal-image').alt = p.title;
 
