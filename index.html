@@ -13,196 +13,301 @@
         }
         @font-face {
             font-family: 'Pretendard';
+            src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Medium.woff2') format('woff2');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'Pretendard';
             src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Bold.woff2') format('woff2');
             font-weight: 700;
         }
 
+        :root {
+            --navy: #0f2027;
+            --navy-2: #16333d;
+            --steel: #203a43;
+            --accent: #b98a4b;
+            --accent-light: #d8b47f;
+            --text-body: #4a5560;
+            --text-muted: #8895a1;
+            --bg-alt: #f7f8f9;
+        }
+
         * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
             margin: 0;
             padding: 0;
-            color: #333;
-            line-height: 1.6;
+            color: var(--text-body);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
 
         header {
-            background-color: #0f2027;
+            background-color: var(--navy);
             color: white;
-            padding: 20px 50px;
+            padding: 22px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
         }
-        .logo { font-size: 24px; font-weight: bold; }
+        .logo-group { display: flex; flex-direction: column; line-height: 1.2; }
+        .logo { font-size: 21px; font-weight: 700; letter-spacing: 0.3px; }
+        .tagline { font-size: 11px; color: var(--accent-light); letter-spacing: 1.5px; margin-top: 3px; }
         nav a {
-            color: white;
+            color: #dfe6ea;
             text-decoration: none;
-            margin-left: 20px;
-            font-weight: bold;
+            margin-left: 28px;
+            font-weight: 500;
+            font-size: 15px;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.2s ease;
         }
-        nav a:hover { color: #ced4da; }
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: 0;
+            width: 0%;
+            height: 1px;
+            background: var(--accent-light);
+            transition: width 0.25s ease;
+        }
+        nav a:hover { color: white; }
+        nav a:hover::after { width: 100%; }
 
         .hero {
-            background: linear-gradient(rgba(15, 32, 39, 0.8), rgba(32, 58, 67, 0.8)),
+            background: linear-gradient(rgba(10, 22, 28, 0.86), rgba(22, 51, 61, 0.82)),
                         url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
             color: white;
-            padding: 100px 20px;
+            padding: 130px 20px;
             text-align: center;
         }
+        .hero .eyebrow {
+            display: inline-block;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--accent-light);
+            font-weight: 700;
+            margin-bottom: 22px;
+            text-transform: uppercase;
+        }
         .hero h1 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            font-size: 30px;
+            font-weight: 500;
+            margin: 0 0 24px;
+            line-height: 1.6;
+            color: #f1f3f4;
         }
         .hero p {
             font-size: 18px;
-            color: #ced4da;
+            color: #b9c4cb;
+            font-weight: 300;
+            letter-spacing: 0.3px;
         }
 
-        .section {
-            padding: 60px 20px;
-            text-align: center;
+        .section { padding: 90px 20px; text-align: center; }
+        .section.alt { background: var(--bg-alt); }
+        .section .eyebrow {
+            display: block;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
         }
         .section h2 {
-            font-size: 26px;
-            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+            color: var(--navy);
+        }
+        .section .lede {
+            max-width: 520px;
+            margin: 14px auto 0;
+            color: var(--text-muted);
+            font-size: 15px;
         }
 
         .grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
+            gap: 32px;
+            margin-top: 50px;
         }
         .card {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-top: 5px solid #203a43;
-            padding: 30px;
-            width: 300px;
+            background: white;
+            border: 1px solid #eceff1;
+            padding: 36px 32px;
+            width: 320px;
             max-width: 100%;
-            border-radius: 8px;
+            border-radius: 10px;
             text-align: left;
-        }
-        .card h3 { color: #203a43; margin-top: 0; }
-        .card {
             cursor: pointer;
-            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(15, 32, 39, 0.05);
+            transition: box-shadow 0.25s ease, transform 0.25s ease;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--steel));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
         }
         .card:hover {
-            box-shadow: 0 6px 16px rgba(15, 32, 39, 0.12);
-            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(15, 32, 39, 0.12);
+            transform: translateY(-4px);
         }
-        .card .more { color: #203a43; font-weight: bold; font-size: 14px; margin-top: 12px; display: inline-block; }
+        .card:hover::before { transform: scaleX(1); }
+        .card h3 { color: var(--navy); margin: 0 0 12px; font-size: 19px; font-weight: 700; }
+        .card p { margin: 0; font-size: 14.5px; color: var(--text-body); }
+        .card .more {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 13px;
+            margin-top: 18px;
+            display: inline-block;
+            letter-spacing: 0.3px;
+        }
 
         .modal-overlay {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(15, 32, 39, 0.55);
+            background: rgba(10, 20, 25, 0.6);
             align-items: center;
             justify-content: center;
             padding: 20px;
             z-index: 100;
+            backdrop-filter: blur(2px);
         }
         .modal-overlay.active { display: flex; }
         .modal {
             background: white;
-            border-radius: 10px;
+            border-radius: 12px;
             max-width: 640px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
             text-align: left;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
         }
         .modal-image {
             width: 100%;
             height: 260px;
             object-fit: cover;
-            border-radius: 10px 10px 0 0;
+            border-radius: 12px 12px 0 0;
             display: block;
         }
-        .modal-body { padding: 30px; }
-        .modal-body h3 { color: #203a43; margin: 0 0 8px; font-size: 28px; }
+        .modal-body { padding: 38px 36px 42px; }
+        .modal-body h3 { color: var(--navy); margin: 0 0 8px; font-size: 28px; font-weight: 700; }
         #modal-desc { overflow: hidden; }
-        .modal-body #modal-desc p { color: #495057; margin: 0 0 2px; }
+        .modal-body #modal-desc p { color: var(--text-body); margin: 0 0 2px; font-size: 15px; }
         .modal-section-heading {
             font-size: 21px;
             font-weight: 700;
-            color: #0f2027;
+            color: var(--navy);
             margin: 26px 0 4px;
         }
         .modal-section-heading:first-of-type { margin-top: 28px; }
         .modal-close {
             position: absolute;
-            top: 14px;
-            right: 14px;
-            background: rgba(15, 32, 39, 0.7);
+            top: 16px;
+            right: 16px;
+            background: rgba(15, 32, 39, 0.65);
             color: white;
             border: none;
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             font-size: 18px;
             line-height: 1;
             cursor: pointer;
+            transition: background 0.2s ease;
         }
-        .modal-close:hover { background: #0f2027; }
+        .modal-close:hover { background: var(--navy); }
 
-        #contact {
-            background: #f1f3f5;
-        }
         .contact-box {
             max-width: 480px;
-            margin: 0 auto;
+            margin: 50px auto 0;
             background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 40px 30px;
+            border: 1px solid #eceff1;
+            border-radius: 10px;
+            padding: 44px 36px;
+            box-shadow: 0 2px 8px rgba(15, 32, 39, 0.05);
         }
         .contact-box p {
-            margin-bottom: 24px;
-            color: #495057;
+            margin-bottom: 26px;
+            color: var(--text-body);
+            font-size: 15px;
         }
         .mail-button {
             display: inline-block;
-            background: #203a43;
+            background: var(--navy);
             color: white;
             text-decoration: none;
-            font-weight: bold;
-            padding: 14px 30px;
+            font-weight: 700;
+            font-size: 14.5px;
+            padding: 15px 34px;
             border-radius: 6px;
-            transition: background 0.2s ease;
+            letter-spacing: 0.3px;
+            transition: background 0.2s ease, transform 0.2s ease;
         }
-        .mail-button:hover { background: #0f2027; }
+        .mail-button:hover { background: var(--accent); transform: translateY(-1px); }
 
         footer {
-            background: #0f2027;
-            color: #868e96;
+            background: var(--navy);
+            color: #7c8992;
             text-align: center;
-            padding: 30px 20px;
-            font-size: 14px;
+            padding: 40px 20px 32px;
+            font-size: 13.5px;
         }
-        footer p { margin: 6px 0; }
+        footer .footer-logo {
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 14px;
+        }
+        footer p { margin: 5px 0; }
+        footer .divider {
+            width: 40px;
+            height: 1px;
+            background: rgba(255,255,255,0.15);
+            margin: 18px auto;
+        }
 
         @media (max-width: 600px) {
             header { padding: 16px 20px; justify-content: center; text-align: center; }
             nav a { margin: 0 10px; }
-            .hero { padding: 70px 16px; }
-            .hero h1 { font-size: 24px; }
-            .hero p { font-size: 16px; }
+            .hero { padding: 80px 16px; }
+            .hero h1 { font-size: 22px; }
+            .hero p { font-size: 15px; }
+            .section { padding: 60px 16px; }
             .card { width: 100%; }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">엔솔브 코리아</div>
+        <div class="logo-group">
+            <div class="logo">엔솔브 코리아</div>
+            <div class="tagline">SINCE 2001 · OFFICIAL EXCLUSIVE IMPORTER</div>
+        </div>
         <nav>
             <a href="#products">제품소개</a>
             <a href="mailto:jun@ensolvkorea.com?subject=%5B%EC%97%94%EC%86%94%EB%B8%8C%20%EC%BD%94%EB%A6%AC%EC%95%84%5D%20%EC%A0%9C%ED%92%88%20%EB%AC%B8%EC%9D%98">고객문의</a>
@@ -210,12 +315,15 @@
     </header>
 
     <section class="hero">
+        <span class="eyebrow">Official Exclusive Importer in Korea</span>
         <h1>현재 홈페이지 점검 중입니다.<br>제품 관련 문의는 jun@ensolvkorea.com 으로 이메일을 보내주시기 바랍니다.</h1>
         <p>미국 No.1 산업용 세정제 '그린파워' & '엔솔브' 한국 공식 독점 수입원</p>
     </section>
 
     <section class="section" id="products">
+        <span class="eyebrow">Product Lineup</span>
         <h2>핵심 라인업</h2>
+        <p class="lede">엄격한 품질 기준을 통과한 미국 정품 산업용 세정 솔루션을 소개합니다.</p>
         <div class="grid">
             <div class="card" onclick="openModal('greenpower')">
                 <h3>그린파워 (Green Power)</h3>
@@ -223,8 +331,8 @@
                 <span class="more">자세히 보기 →</span>
             </div>
             <div class="card" onclick="openModal('ensolve')">
-                <h3>엔솔브 5408 (Ensolve)</h3>
-                <p>첨단 산업 공정을 위한 정밀 탈지 및 속건성 전문 세정 솔루션</p>
+                <h3>엔솔브 5408 (EnSolv® 5408)</h3>
+                <p>보잉 승인 고정밀 세척 용제 — 항공우주·전자·자동차 산업의 정밀 세척 솔루션</p>
                 <span class="more">자세히 보기 →</span>
             </div>
         </div>
@@ -241,7 +349,8 @@
         </div>
     </div>
 
-    <section class="section" id="contact">
+    <section class="section alt" id="contact">
+        <span class="eyebrow">Contact</span>
         <h2>고객문의</h2>
         <div class="contact-box">
             <p>제품 관련 문의사항은 아래 버튼을 눌러 이메일로 보내주세요.</p>
@@ -252,7 +361,9 @@
     </section>
 
     <footer>
+        <div class="footer-logo">엔솔브 코리아</div>
         <p>© 2001 엔솔브 코리아 All Rights Reserved. | 미국 본사 정품 공급원</p>
+        <div class="divider"></div>
         <p>대표전화: 054-972-7990 | 주소: 경북 칠곡군 지천면 송정원곡길 25 | 우편번호: 39867</p>
     </footer>
 
@@ -269,10 +380,13 @@
                 ]
             },
             ensolve: {
-                title: '엔솔브 5408 (Ensolve)',
+                title: '엔솔브 5408 (EnSolv® 5408)',
                 image: 'https://images.unsplash.com/photo-1581092160607-ee22731c9d47?auto=format&fit=crop&w=1200&q=80',
                 sections: [
-                    { heading: '정밀 탈지 및 속건성', text: '첨단 산업 공정을 위한 정밀 탈지 및 속건성 전문 세정 솔루션입니다. 정밀 부품의 미세한 유분과 이물질까지 완벽하게 제거하며, 빠른 건조 속도로 생산성 저하 없이 공정에 적용할 수 있습니다.' }
+                    { heading: '보잉(Boeing) 승인 고정밀 세척 용제', text: 'EnSolv® 5408은 보잉사에서 공식 승인한 n-프로필 브로마이드 기반의 정밀 세척 용제입니다. 항공우주, 전자, 자동차 등 높은 신뢰성을 요구하는 첨단 산업 분야의 정밀 세척 프로세스에 최적화되어 있습니다. 기존 할로겐화 용제를 대체할 수 있는 강력하고 경제적인 친환경·고성능 솔루션입니다.' },
+                    { heading: '뛰어난 용해력 및 빠른 침투·건조', text: '향상된 안정성과 높은 용해력으로 금속 및 전자 부품에 남아 있는 오일, 그리스, 플럭스 잔류물 등 각종 오염 물질을 완벽하게 제거합니다. 표면 장력과 점도가 낮아 복잡하고 미세한 부품 내부까지 깊숙이 침투하며, 건조 속도가 빨라 작업 효율을 극대화합니다.' },
+                    { heading: '친환경 및 뛰어난 작업 안전성', text: '불연성 제품으로 인화점이 없어 화재 위험이 없으며, 오존층 파괴 지수(ODP) 0 및 PFAS 미함유로 환경 규제에 대응할 수 있습니다. 세척 후 표면 잔류물이 남지 않아 후속 공정의 신뢰성을 높여줍니다.' },
+                    { heading: '다양한 세척 공정 및 산업 분야 적용', text: '증기 탈지, 초음파 세척, 디플럭스, 산소 튜브 세척은 물론 운반액 및 윤활제 분산용 용제 등 다양한 방식으로 활용 가능합니다. 전자부품, 항공우주 부품, 자동차 부품 및 일반 산업용 탈지에 폭넓게 사용됩니다.' }
                 ]
             }
         };
