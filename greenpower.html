@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>그린파워 (Green Power) | 엔솔브 코리아</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <style>
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Medium.woff2') format('woff2'); font-weight: 500; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; }
+
+        :root {
+            --navy: #0f2027;
+            --steel: #203a43;
+            --accent: #b98a4b;
+            --accent-light: #d8b47f;
+            --text-body: #4a5560;
+            --text-muted: #8895a1;
+            --bg-alt: #f7f8f9;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Pretendard', 'Malgun Gothic', sans-serif; margin: 0; padding: 0; color: var(--text-body); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+        header {
+            background-color: var(--navy);
+            color: white;
+            padding: 18px 60px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+        }
+        .menu-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            margin-right: 26px;
+            flex-shrink: 0;
+        }
+        .menu-toggle span {
+            width: 22px;
+            height: 2px;
+            background: white;
+            display: block;
+            transition: transform 0.25s ease, opacity 0.2s ease;
+        }
+        .menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 60px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 16px 32px rgba(15,32,39,0.18);
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: max-height 0.25s ease, opacity 0.2s ease, transform 0.25s ease;
+            min-width: 180px;
+            margin-top: 8px;
+        }
+        .dropdown-menu.active { max-height: 460px; opacity: 1; transform: translateY(0); }
+        .dropdown-menu a {
+            display: block;
+            padding: 16px 22px;
+            color: var(--navy);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            border-bottom: 1px solid #eceff1;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        .dropdown-menu a:last-child { border-bottom: none; }
+        .dropdown-menu a:hover { background: var(--bg-alt); color: var(--accent); }
+        .dropdown-parent { border-bottom: 1px solid #eceff1; }
+        .dropdown-parent-toggle {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 16px 22px;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: inherit;
+            color: var(--navy);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        .dropdown-parent-toggle:hover { background: var(--bg-alt); color: var(--accent); }
+        .dropdown-parent .chevron { font-size: 11px; transition: transform 0.2s ease; }
+        .dropdown-parent.open .chevron { transform: rotate(180deg); }
+        .submenu { max-height: 0; overflow: hidden; background: var(--bg-alt); transition: max-height 0.25s ease; }
+        .dropdown-parent.open .submenu { max-height: 120px; }
+        .submenu a { padding: 13px 22px 13px 38px; font-size: 14px; border-bottom: 1px solid #e7eaec; }
+        .submenu a:last-child { border-bottom: none; }
+
+        .logo-group { display: flex; flex-direction: column; line-height: 1.2; }
+        .logo { font-size: 21px; font-weight: 700; letter-spacing: 0.3px; }
+        .logo a { color: white; text-decoration: none; }
+        .tagline { font-size: 11px; color: var(--accent-light); letter-spacing: 1.5px; margin-top: 3px; }
+        nav { margin-left: auto; }
+        nav a { color: #dfe6ea; text-decoration: none; margin-left: 28px; font-weight: 500; font-size: 15px; position: relative; padding-bottom: 4px; transition: color 0.2s ease; }
+        nav a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0%; height: 1px; background: var(--accent-light); transition: width 0.25s ease; }
+        nav a:hover { color: white; } nav a:hover::after { width: 100%; }
+
+        .breadcrumb { padding: 22px 60px 0; font-size: 13.5px; color: var(--text-muted); }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--accent); }
+
+        .product-hero { padding: 40px 60px 10px; display: flex; gap: 50px; align-items: flex-start; flex-wrap: wrap; }
+        .product-hero img { width: 420px; max-width: 100%; height: 320px; object-fit: cover; border-radius: 12px; box-shadow: 0 12px 30px rgba(15,32,39,0.12); }
+        .product-hero-text { flex: 1; min-width: 280px; padding-top: 10px; }
+        .eyebrow { display: block; font-size: 13px; letter-spacing: 2px; color: var(--accent); font-weight: 700; margin-bottom: 12px; text-transform: uppercase; }
+        .product-hero-text h1 { font-size: 34px; font-weight: 700; color: var(--navy); margin: 0 0 8px; }
+        .product-hero-text .en-name { font-size: 17px; font-weight: 500; color: var(--text-muted); margin-bottom: 20px; display: block; }
+        .product-hero-text .summary { font-size: 16px; color: var(--text-body); max-width: 480px; }
+        .cta-row { margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-primary, .btn-secondary {
+            display: inline-block; text-decoration: none; font-weight: 700; font-size: 14.5px;
+            padding: 14px 30px; border-radius: 6px; letter-spacing: 0.3px; transition: all 0.2s ease;
+        }
+        .btn-primary { background: var(--navy); color: white; }
+        .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+        .btn-secondary { background: white; color: var(--navy); border: 1px solid #dfe3e6; }
+        .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+        .section { padding: 70px 60px; }
+        .section.alt { background: var(--bg-alt); }
+        .section-title { font-size: 24px; font-weight: 700; color: var(--navy); margin: 0 0 40px; text-align: center; }
+
+        .feature-list { max-width: 780px; margin: 0 auto; }
+        .feature-item { margin-bottom: 34px; }
+        .feature-item:last-child { margin-bottom: 0; }
+        .feature-item h3 { font-size: 20px; font-weight: 700; color: var(--navy); margin: 0 0 8px; }
+        .feature-item p { font-size: 15.5px; color: var(--text-body); margin: 0; white-space: pre-line; }
+
+        .spec-table { max-width: 780px; margin: 0 auto; border-collapse: collapse; width: 100%; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(15,32,39,0.05); }
+        .spec-table tr { border-bottom: 1px solid #eceff1; }
+        .spec-table tr:last-child { border-bottom: none; }
+        .spec-table th, .spec-table td { padding: 16px 24px; text-align: left; font-size: 14.5px; }
+        .spec-table th { width: 180px; background: var(--bg-alt); color: var(--navy); font-weight: 700; }
+        .spec-table td { color: var(--text-body); }
+
+        .note { max-width: 780px; margin: 20px auto 0; font-size: 13px; color: var(--text-muted); text-align: center; }
+
+        footer { background: var(--navy); color: #7c8992; text-align: center; padding: 40px 20px 32px; font-size: 13.5px; }
+        footer .footer-logo { color: white; font-weight: 700; font-size: 16px; margin-bottom: 14px; }
+        footer p { margin: 5px 0; }
+        footer .divider { width: 40px; height: 1px; background: rgba(255,255,255,0.15); margin: 18px auto; }
+
+        @media (max-width: 700px) {
+            header, .breadcrumb, .product-hero, .section { padding-left: 24px; padding-right: 24px; }
+            .product-hero { padding-top: 30px; }
+            .product-hero img { width: 100%; height: 220px; }
+            .product-hero-text h1 { font-size: 26px; }
+            .spec-table th { width: 120px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="menu-toggle" id="menu-toggle" onclick="toggleMenu()" aria-label="메뉴">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="logo-group">
+            <div class="logo"><a href="ensolvkorea.html">엔솔브 코리아</a></div>
+            <div class="tagline">SINCE 2001 · OFFICIAL EXCLUSIVE IMPORTER</div>
+        </div>
+        <nav>
+            <a href="mailto:jun@ensolvkorea.com?subject=%5B%EC%97%94%EC%86%94%EB%B8%8C%20%EC%BD%94%EB%A6%AC%EC%95%84%5D%20%EC%A0%9C%ED%92%88%20%EB%AC%B8%EC%9D%98">고객 문의</a>
+        </nav>
+        <div class="dropdown-menu" id="dropdown-menu">
+            <a href="ensolvkorea.html">홈</a>
+            <div class="dropdown-parent" id="dropdown-parent">
+                <button class="dropdown-parent-toggle" onclick="toggleSubmenu(event)">제품 <span class="chevron">▾</span></button>
+                <div class="submenu">
+                    <a href="greenpower.html">그린파워</a>
+                    <a href="ensolve5408.html">엔솔브 5408</a>
+                </div>
+            </div>
+            <a href="mailto:jun@ensolvkorea.com?subject=%5B%EC%97%94%EC%86%94%EB%B8%8C%20%EC%BD%94%EB%A6%AC%EC%95%84%5D%20%EC%A0%9C%ED%92%88%20%EB%AC%B8%EC%9D%98">고객문의</a>
+        </div>
+    </header>
+
+    <div class="breadcrumb"><a href="ensolvkorea.html">홈</a> / <a href="ensolvkorea.html#products">제품소개</a> / 그린파워</div>
+
+    <section class="product-hero">
+        <img src="https://images.unsplash.com/photo-1581093458791-9d42e1a6e6b3?auto=format&fit=crop&w=1200&q=80" alt="그린파워">
+        <div class="product-hero-text">
+            <span class="eyebrow">Industrial Cleaner</span>
+            <h1>그린파워</h1>
+            <span class="en-name">(Green Power)</span>
+            <p class="summary">강력한 세정력과 작업자의 안전을 동시에 만족시키는 친환경 고성능 산업용 세정제입니다.</p>
+            <div class="cta-row">
+                <a class="btn-primary" href="mailto:jun@ensolvkorea.com?subject=%5B%EC%97%94%EC%86%94%EB%B8%8C%20%EC%BD%94%EB%A6%AC%EC%95%84%5D%20%EA%B7%B8%EB%A6%B0%ED%8C%8C%EC%9B%8C%20%EB%AC%B8%EC%9D%98">제품 문의하기</a>
+                <a class="btn-secondary" href="ensolvkorea.html#products">다른 제품 보기</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">주요 특장점</h2>
+        <div class="feature-list">
+            <div class="feature-item">
+                <h3>강력한 세척 및 박리 성능</h3>
+                <p>왁스, 플럭스, 냉각수(절삭유), 오일, 페인트 및 광학 부품의 이물질 등을 깨끗하게 세척하고 제거합니다. 위어 바(Weir bar) 및 오일 스키머의 유수 분리가 원활하도록 설계되어, 유독성 폐기물 배출량을 최소화합니다.</p>
+            </div>
+            <div class="feature-item">
+                <h3>소재 보호 및 광택 효과</h3>
+                <p>알루미늄, 황동, 구리의 표면을 변색 없이 밝고 깨끗하게 만들어 줍니다.
+냉수와 온수 모두에서 사용할 수 있습니다.</p>
+            </div>
+            <div class="feature-item">
+                <h3>뛰어난 호환성과 안전성</h3>
+                <p>모든 브랜드의 수계 부품 세척기, 디버링(바리 제거) 장비, 초음파 세척기,
+바닥 세척기, 고압 및 스팀 세척기에 안전하게 사용할 수 있습니다.</p>
+            </div>
+            <div class="feature-item">
+                <h3>편리한 작업성</h3>
+                <p>거품이 적게 발생하고 물에 잘 씻겨 내려가며, 별도의 소포제(거품 제거제)가
+필요 없습니다. 경수, 연수, 탈이온수(순수) 등 모든 수질에서 효과적입니다.
+인산염을 함유하지 않으며, 방청(녹 방지) 성분이 포함되어 있습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alt">
+        <h2 class="section-title">제품 제원</h2>
+        <table class="spec-table">
+            <tr><th>제품명</th><td>그린파워 (Green Power)</td></tr>
+            <tr><th>제형/외관</th><td>-</td></tr>
+            <tr><th>주요 용도</th><td>산업용 부품 세척, 탈지</td></tr>
+            <tr><th>pH</th><td>-</td></tr>
+            <tr><th>인화점</th><td>-</td></tr>
+            <tr><th>비중</th><td>-</td></tr>
+            <tr><th>포장 단위</th><td>-</td></tr>
+            <tr><th>보관 방법</th><td>-</td></tr>
+            <tr><th>원산지</th><td>미국</td></tr>
+        </table>
+        <p class="note">※ 정확한 제원 정보는 준비 중입니다. 자세한 사항은 고객문의로 연락해 주세요.</p>
+    </section>
+
+    <footer>
+        <div class="footer-logo">엔솔브 코리아</div>
+        <p>© 2001 엔솔브 코리아 All Rights Reserved. | 미국 본사 정품 공급원</p>
+        <div class="divider"></div>
+        <p>대표전화: 054-972-7990 | 주소: 경북 칠곡군 지천면 송정원곡길 25 | 우편번호: 39867</p>
+    </footer>
+    <script>
+        function toggleMenu() {
+            document.getElementById('menu-toggle').classList.toggle('active');
+            document.getElementById('dropdown-menu').classList.toggle('active');
+        }
+        function closeMenu() {
+            document.getElementById('menu-toggle').classList.remove('active');
+            document.getElementById('dropdown-menu').classList.remove('active');
+        }
+        function toggleSubmenu(e) {
+            e.stopPropagation();
+            document.getElementById('dropdown-parent').classList.toggle('open');
+        }
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('dropdown-menu');
+            const toggle = document.getElementById('menu-toggle');
+            if (menu.classList.contains('active') && !menu.contains(e.target) && !toggle.contains(e.target)) {
+                closeMenu();
+            }
+        });
+    </script>
+</body>
+</html>
