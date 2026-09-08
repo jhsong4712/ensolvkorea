@@ -21,7 +21,7 @@
         }
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Pretendard', 'Malgun Gothic', sans-serif; margin: 0; padding: 0; color: var(--text-body); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Pretendard', 'Malgun Gothic', sans-serif; margin: 0; padding: 0; color: var(--text-body); line-height: 1.7; -webkit-font-smoothing: antialiased; word-break: keep-all; overflow-wrap: break-word; }
 
         header {
             background-color: var(--navy);
@@ -84,6 +84,7 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 15px;
+            text-align: left;
             border-bottom: 1px solid #eceff1;
             transition: background 0.15s ease, color 0.15s ease;
         }
@@ -111,7 +112,7 @@
         .dropdown-parent.open .chevron { transform: rotate(180deg); }
         .submenu { max-height: 0; overflow: hidden; background: var(--bg-alt); transition: max-height 0.25s ease; }
         .dropdown-parent.open .submenu { max-height: 120px; }
-        .submenu a { padding: 13px 22px 13px 38px; font-size: 14px; border-bottom: 1px solid #e7eaec; }
+        .submenu a { padding: 13px 22px 13px 38px; font-size: 14px; text-align: left; border-bottom: 1px solid #e7eaec; }
         .submenu a:last-child { border-bottom: none; }
 
         .logo-group { display: flex; flex-direction: column; line-height: 1.2; }
@@ -127,9 +128,9 @@
         .breadcrumb a { color: var(--text-muted); text-decoration: none; }
         .breadcrumb a:hover { color: var(--accent); }
 
-        .product-hero { padding: 40px 60px 10px; display: flex; gap: 50px; align-items: flex-start; flex-wrap: wrap; }
-        .product-hero img { width: 420px; max-width: 100%; height: 320px; object-fit: cover; border-radius: 12px; box-shadow: 0 12px 30px rgba(15,32,39,0.12); }
-        .product-hero-text { flex: 1; min-width: 280px; padding-top: 10px; }
+        .product-hero { padding: 40px 60px 10px; max-width: 1040px; margin: 0 auto; display: flex; gap: 50px; align-items: flex-start; justify-content: center; flex-wrap: wrap; }
+        .product-hero img { width: 380px; flex-shrink: 0; max-width: 100%; height: 300px; object-fit: cover; border-radius: 12px; box-shadow: 0 12px 30px rgba(15,32,39,0.12); }
+        .product-hero-text { flex: 1 1 420px; max-width: 480px; min-width: 280px; padding-top: 10px; }
         .eyebrow { display: block; font-size: 13px; letter-spacing: 2px; color: var(--accent); font-weight: 700; margin-bottom: 12px; text-transform: uppercase; }
         .product-hero-text h1 { font-size: 34px; font-weight: 700; color: var(--navy); margin: 0 0 8px; }
         .product-hero-text .en-name { font-size: 17px; font-weight: 500; color: var(--text-muted); margin-bottom: 20px; display: block; }
@@ -148,20 +149,20 @@
         .section.alt { background: var(--bg-alt); }
         .section-title { font-size: 24px; font-weight: 700; color: var(--navy); margin: 0 0 40px; text-align: center; }
 
-        .feature-list { max-width: 780px; margin: 0 auto; }
+        .feature-list { max-width: 920px; margin: 0 auto; }
         .feature-item { margin-bottom: 34px; }
         .feature-item:last-child { margin-bottom: 0; }
         .feature-item h3 { font-size: 20px; font-weight: 700; color: var(--navy); margin: 0 0 8px; }
-        .feature-item p { font-size: 15.5px; color: var(--text-body); margin: 0; white-space: pre-line; }
+        .feature-item p { font-size: 15.5px; color: var(--text-body); margin: 0; white-space: pre-line; word-break: keep-all; overflow-wrap: break-word; }
 
-        .spec-table { max-width: 780px; margin: 0 auto; border-collapse: collapse; width: 100%; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(15,32,39,0.05); }
+        .spec-table { max-width: 920px; margin: 0 auto; border-collapse: collapse; width: 100%; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(15,32,39,0.05); }
         .spec-table tr { border-bottom: 1px solid #eceff1; }
         .spec-table tr:last-child { border-bottom: none; }
         .spec-table th, .spec-table td { padding: 16px 24px; text-align: left; font-size: 14.5px; }
         .spec-table th { width: 180px; background: var(--bg-alt); color: var(--navy); font-weight: 700; }
         .spec-table td { color: var(--text-body); }
 
-        .note { max-width: 780px; margin: 20px auto 0; font-size: 13px; color: var(--text-muted); text-align: center; }
+        .note { max-width: 920px; margin: 20px auto 0; font-size: 13px; color: var(--text-muted); text-align: center; }
 
         footer { background: var(--navy); color: #7c8992; text-align: center; padding: 40px 20px 32px; font-size: 13.5px; }
         footer .footer-logo { color: white; font-weight: 700; font-size: 16px; margin-bottom: 14px; }
@@ -205,7 +206,6 @@
     <div class="breadcrumb"><a href="index.html">홈</a> / <a href="index.html#products">제품소개</a> / 엔솔브 5408</div>
 
     <section class="product-hero">
-        <img src="https://images.unsplash.com/photo-1581092160607-ee22731c9d47?auto=format&fit=crop&w=1200&q=80" alt="엔솔브 5408">
         <div class="product-hero-text">
             <span class="eyebrow">Precision Cleaning Solvent</span>
             <h1>엔솔브 5408</h1>
@@ -216,6 +216,7 @@
                 <a class="btn-secondary" href="index.html#products">다른 제품 보기</a>
             </div>
         </div>
+        <img src="https://images.unsplash.com/photo-1581092160607-ee22731c9d47?auto=format&fit=crop&w=1200&q=80" alt="엔솔브 5408">
     </section>
 
     <section class="section">
@@ -227,10 +228,7 @@
             </div>
             <div class="feature-item">
                 <h3>뛰어난 용해력 및 빠른 침투·건조</h3>
-                <p>향상된 안정성과 높은 용해력으로 금속 및 전자 부품에 남아 있는 오일, 그리스,
-플럭스 잔류물 등 각종 오염 물질을 완벽하게 제거합니다. 표면 장력과 점도가
-낮아 복잡하고 미세한 부품 내부까지 깊숙이 침투하며, 건조 속도가 빨라 작업
-효율을 극대화합니다.</p>
+                <p>향상된 안정성과 높은 용해력으로 금속 및 전자 부품에 남아 있는 오일, 그리스, 플럭스 잔류물 등 각종 오염 물질을 완벽하게 제거합니다. 표면 장력과 점도가 낮아 복잡하고 미세한 부품 내부까지 깊숙이 침투하며, 건조 속도가 빨라 작업 효율을 극대화합니다.</p>
             </div>
             <div class="feature-item">
                 <h3>친환경 및 뛰어난 작업 안전성</h3>
@@ -238,9 +236,7 @@
             </div>
             <div class="feature-item">
                 <h3>다양한 세척 공정 및 산업 분야 적용</h3>
-                <p>증기 탈지, 초음파 세척, 디플럭스, 산소 튜브 세척은 물론 운반액 및 윤활제
-분산용 용제 등 다양한 방식으로 활용 가능합니다. 전자부품, 항공우주 부품,
-자동차 부품 및 일반 산업용 탈지에 폭넓게 사용됩니다.</p>
+                <p>증기 탈지, 초음파 세척, 디플럭스, 산소 튜브 세척은 물론 운반액 및 윤활제 분산용 용제 등 다양한 방식으로 활용 가능합니다. 전자부품, 항공우주 부품, 자동차 부품 및 일반 산업용 탈지에 폭넓게 사용됩니다.</p>
             </div>
         </div>
     </section>
@@ -255,7 +251,7 @@
             <tr><th>ODP (오존층 파괴 지수)</th><td>0</td></tr>
             <tr><th>PFAS 함유 여부</th><td>미함유</td></tr>
             <tr><th>비중</th><td>-</td></tr>
-            <tr><th>포장 단위</th><td>-</td></tr>
+            <tr><th>포장 단위</th><td>55갤런(드럼)</td></tr>
             <tr><th>보관 방법</th><td>-</td></tr>
             <tr><th>인증</th><td>Boeing 승인</td></tr>
             <tr><th>원산지</th><td>미국</td></tr>
